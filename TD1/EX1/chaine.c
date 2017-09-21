@@ -4,6 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 /*!
  * \file chaine.c
@@ -23,25 +24,30 @@ struct chaine {
 
 chaine chaine_creer_vide()
 {
-	(*chaine).taille = 0;
-	(*chaine).tab = NULL;
+	chaine ch;
+	ch.taille = 0;
+	ch.tab = NULL;
 }
 
 chaine chaine_creer_char(char* c)
 {
-	(*chaine).taille = length(c);
-	(*chaine).tab = c;
+	chaine ch;
+	ch.taille = length(c);
+	ch.tab = c;
 	return chaine;
 }
 
 void chaine_detruire(chaine* ch)
 {
-	free((*chaine).taille);
-	free((*chaine).tab);
+	free(ch.taille);
+	free(ch.tab);
+	free(ch);
 }
 
 void chaine_afficher(FILE* f, chaine ch)
 {
+	fopen(f,"w");
+	fputs(ch, f);
 }
 
 unsigned int chaine_extraire_taille(chaine ch)
@@ -63,14 +69,16 @@ bool chaine_est_vide(chaine ch)
 bool chaine_est_egal(chaine ch1, chaine ch2)
 {
 	if(ch1 == ch2){
-		return 0;
-	} else {
 		return 1;
+	} else {
+		return 0;
 	}
 }
 
 void chaine_concatener(chaine ch1, chaine ch2)
 {
+	strcat(ch1, ch2);
+	return ch1;
 }
 
 char chaine_extraire_char_i(chaine ch, const unsigned int i)
@@ -111,10 +119,14 @@ chaine chaine_copier(chaine ch1)
 
 void chaine_en_minuscules(chaine ch)
 {
+	ch = tolower(ch);
+	return ch;
 }
 
 void chaine_en_majuscules(chaine ch)
 {
+	ch = toupper(ch);
+	return ch;
 }
 
 bool chaine_appartenir(const char c, chaine ch, int* i)
@@ -131,6 +143,10 @@ bool chaine_appartenir(const char c, chaine ch, int* i)
 
 chaine chaine_lire(FILE* f, unsigned int taille)
 {
+	fopen(f,"r");
+	char* ch;
+	fgets(ch, taille, f);
+	return ch;
 }
 
 

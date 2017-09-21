@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "motus.h"
 #include "chaine.h"
 
@@ -32,12 +33,21 @@ struct motus {
 
 motus motus_creer(unsigned int _t_mot, unsigned int _nb_essai, char* mot)
 {
-  // à écrire 
+  motus motus_create;
+  motus_create.t_mot = _t_mot;
+  motus_create.nb_essai = _nb_essai;
+  motus_create.mot = mot;
+
+  return motus;
 }
 
 void motus_detruire(motus* m)
 {
-  // à écrire
+  free(m.t_mot);
+  free(m.nb_essai);
+  free(m.mot);
+  free(m.propositions);
+  free(m.resultats);
 }
 
 
@@ -80,7 +90,32 @@ void motus_afficher(motus m, unsigned int numero, bool gagne)
 
 chaine chaine_code(chaine ch, chaine mot, bool* gagne)
 {
-  //à écrire
+  int i,j;
+  char* code;
+  if(ch == mot){
+    return gagne;
+  } 
+  else {
+    for(i = 0; i <= length(ch); i++){
+
+      for(j = 0; j <= length(mot); j++){
+
+        if(ch.tab[i] == mot.tab[j]){
+          strcat(code,"=");
+        }
+
+        if(ch.tab[i] == mot.tab[j]){
+          if(code[i] != ""){
+            strcat(code,"!");
+          }
+        }
+        
+        else{
+          strcat(code,".");
+        }
+      }
+    }
+  }
 }
 
 void motus_jeu(motus m)
