@@ -100,18 +100,18 @@ chaine chaine_code(chaine ch, chaine mot, bool* gagne)
 
       for(j = 0; j <= length(mot); j++){
 
-        if(ch.tab[i] == mot.tab[j]){
+        if(ch.tab[i] == mot.tab[i]){
           strcat(code,"=");
         }
 
         if(ch.tab[i] == mot.tab[j]){
-          if(code[i] != ""){
-            strcat(code,"!");
+          if(code[i] == ""){
+            strcat(code[i],"!");
           }
         }
         
         else{
-          strcat(code,".");
+          strcat(code[i],".");
         }
       }
     }
