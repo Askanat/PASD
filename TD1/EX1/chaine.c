@@ -45,7 +45,7 @@ void chaine_detruire(chaine* ch)
 
 void chaine_afficher(FILE* f, chaine ch)
 {
-	fputs(ch->tab, f);
+	fprintf(f, "%s\n", ch->tab);
 }
 
 unsigned int chaine_extraire_taille(chaine ch)
@@ -57,7 +57,7 @@ unsigned int chaine_extraire_taille(chaine ch)
 
 bool chaine_est_vide(chaine ch)
 {
-	if( 0 == strlen(ch->tab)){
+	if( 0 == ch->taille){
 		return 1;
 	} else {
 		return 0;
@@ -75,16 +75,29 @@ bool chaine_est_egal(chaine ch1, chaine ch2)
 
 void chaine_concatener(chaine ch1, chaine ch2)
 {
-	strcat(ch1->tab, ch2->tab);
-	char concat = ch1->tab;
-	return concat;
+	unsigned int i;
+	char* concat = malloc(sizeof(ch1->tab));
+	*concat = ch1->tab;
+
+	free(ch1->tab);
+	ch1->tab = (char*)malloc((ch1->taille + ch2->taille) * sizeof(char));
+
+	for(i = 0; i < ch1->taille ; i++){
+		ch1->tab[i] =  concat[i];
+	}
+	for(i = 0; i < ch1->taille ; i++){
+		ch1->tab[i] =  ch2->tab[i];
+	}
+	
+	free(concat);
+	return ch1;
 }
 
 char chaine_extraire_char_i(chaine ch, const unsigned int i)
 {
 	unsigned int j;
 	char c = "echec";
-	if(strlen(ch->tab) != NULL){
+	if(ch->taille != 0){
 		if(strlen(ch->tab) >= i){
 			for(j = 0; j <= i; j++){
 				if (j == i){
@@ -93,15 +106,14 @@ char chaine_extraire_char_i(chaine ch, const unsigned int i)
 			}
 			return c;
 		}
-	} else {
-		return c;
 	}
+	return c;
 }
 
 void chaine_modifier_char_i(chaine ch, const unsigned int i, const char c)
 {
 	unsigned int j;
-	if(strlen(ch->tab) != NULL){
+	if(ch->taille != 0){
 		if(strlen(ch->tab) >= i){
 			for(j = 0; j <= i; j++){
 				if (j == i){
@@ -121,14 +133,20 @@ chaine chaine_copier(chaine ch1)
 }
 
 void chaine_en_minuscules(chaine ch)
-{
-	ch->tab = tolower(ch->tab);
+{	
+	int i;
+	for(i=0; ch->tab[i] != '\0'; i++){
+		ch->tab[i] = tolower(ch->tab[i]);
+	}
 	return ch;
 }
 
 void chaine_en_majuscules(chaine ch)
 {
-	ch->tab = toupper(ch->tab);
+	int i;
+	for(i=0; ch->tab[i] != '\0'; i++){
+		ch->tab[i] = toupper(ch->tab[i]);
+	}
 	return ch;
 }
 
@@ -138,10 +156,9 @@ bool chaine_appartenir(const char c, chaine ch, int* i)
 	for(j = 0; j <= k; j++){
 		if (ch->tab[j] == c){
 			return 1;
-		} else {
-			return 0;
 		}
 	}
+	return 0;
 }
 
 chaine chaine_lire(FILE* f, unsigned int taille)

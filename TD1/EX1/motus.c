@@ -34,20 +34,21 @@ struct motus {
 motus motus_creer(unsigned int _t_mot, unsigned int _nb_essai, char* mot)
 {
   motus motus_create;
-  motus_create.t_mot = _t_mot;
-  motus_create.nb_essai = _nb_essai;
-  motus_create.mot = mot;
+  chaine mot;
+  motus_create->t_mot = _t_mot;
+  motus_create->nb_essai = _nb_essai;
+  motus_create->mot->tab = mot;
 
   return motus;
 }
 
 void motus_detruire(motus* m)
 {
-  free(m.t_mot);
-  free(m.nb_essai);
-  free(m.mot);
-  free(m.propositions);
-  free(m.resultats);
+  free(m->t_mot);
+  free(m->nb_essai);
+  free(m->mot);
+  free(m->propositions);
+  free(m->resultats);
 }
 
 
