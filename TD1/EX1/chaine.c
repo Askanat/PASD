@@ -24,42 +24,40 @@ struct chaine {
 
 chaine chaine_creer_vide()
 {
-	chaine ch;
-	ch.taille = 0;
-	ch.tab = NULL;
+	chaine ch = (chaine)malloc(sizeof(struct chaine));
+	ch->taille = 0;
+	ch->tab = NULL;
+	return ch;
 }
 
 chaine chaine_creer_char(char* c)
 {
-	chaine ch;
-	ch.taille = length(c);
-	ch.tab = c;
-	return chaine;
+	chaine ch = (chaine)malloc(sizeof(struct chaine));
+	ch->taille = strlen(c);
+	ch->tab = c;
+	return ch;
 }
 
 void chaine_detruire(chaine* ch)
 {
-	free(ch.taille);
-	free(ch.tab);
 	free(ch);
 }
 
 void chaine_afficher(FILE* f, chaine ch)
 {
-	fopen(f,"w");
-	fputs(ch, f);
+	fputs(ch->tab, f);
 }
 
 unsigned int chaine_extraire_taille(chaine ch)
 {
-	int taille = length(ch);
-	return ch;
+	unsigned int taille = ch->taille;
+	return taille;
 }
 
 
 bool chaine_est_vide(chaine ch)
 {
-	if( 0 == length(ch)){
+	if( 0 == strlen(ch->tab)){
 		return 1;
 	} else {
 		return 0;
@@ -77,32 +75,38 @@ bool chaine_est_egal(chaine ch1, chaine ch2)
 
 void chaine_concatener(chaine ch1, chaine ch2)
 {
-	strcat(ch1, ch2);
-	return ch1;
+	strcat(ch1->tab, ch2->tab);
+	char concat = ch1->tab;
+	return concat;
 }
 
 char chaine_extraire_char_i(chaine ch, const unsigned int i)
 {
-	int j;
-	if(length(ch.tab) >= i){
-		for(j = 0; j<= i; j++){
-			if (j == i){
-				char c = ch.tab[i];
+	unsigned int j;
+	char c = "echec";
+	if(strlen(ch->tab) != NULL){
+		if(strlen(ch->tab) >= i){
+			for(j = 0; j <= i; j++){
+				if (j == i){
+					c = ch->tab[i];
+				}
 			}
+			return c;
 		}
-		return c;
 	} else {
-		exit(1);
+		return c;
 	}
 }
 
 void chaine_modifier_char_i(chaine ch, const unsigned int i, const char c)
 {
-	int j;
-	if(length(ch.tab) >= i){
-		for(j = 0; j<= i; j++){
-			if (j == i){
-				ch.tab[i] = c;
+	unsigned int j;
+	if(strlen(ch->tab) != NULL){
+		if(strlen(ch->tab) >= i){
+			for(j = 0; j <= i; j++){
+				if (j == i){
+					ch->tab[i] = c;
+				}
 			}
 		}
 	}
@@ -110,30 +114,29 @@ void chaine_modifier_char_i(chaine ch, const unsigned int i, const char c)
 
 chaine chaine_copier(chaine ch1)
 {
-	chaine ch2;
-	ch2.taille = ch1.taille;
-	ch2.tab = ch1.tab;
-
+	chaine ch2 = (chaine)malloc(sizeof(struct chaine));
+	ch2->taille = ch1->taille;
+	ch2->tab = ch1->tab;
 	return ch2;
 }
 
 void chaine_en_minuscules(chaine ch)
 {
-	ch = tolower(ch);
+	ch->tab = tolower(ch->tab);
 	return ch;
 }
 
 void chaine_en_majuscules(chaine ch)
 {
-	ch = toupper(ch);
+	ch->tab = toupper(ch->tab);
 	return ch;
 }
 
 bool chaine_appartenir(const char c, chaine ch, int* i)
 {
-	int j;
-	for(j = 0; j <= i; j++){
-		if (ch.tab[j] == c){
+	unsigned int j, k = *i;
+	for(j = 0; j <= k; j++){
+		if (ch->tab[j] == c){
 			return 1;
 		} else {
 			return 0;
@@ -143,9 +146,9 @@ bool chaine_appartenir(const char c, chaine ch, int* i)
 
 chaine chaine_lire(FILE* f, unsigned int taille)
 {
-	fopen(f,"r");
-	char* ch;
-	fgets(ch, taille, f);
+	chaine ch = (chaine)malloc(sizeof(struct chaine));
+	ch->taille = taille;
+	fgets(ch->tab, taille, f);
 	return ch;
 }
 
