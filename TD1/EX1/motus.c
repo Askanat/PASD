@@ -44,11 +44,7 @@ motus motus_creer(unsigned int _t_mot, unsigned int _nb_essai, char* mot)
 
 void motus_detruire(motus* m)
 {
-  free(m->t_mot);
-  free(m->nb_essai);
-  free(m->mot);
-  free(m->propositions);
-  free(m->resultats);
+  free(m);
 }
 
 
