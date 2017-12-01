@@ -190,7 +190,7 @@ public :
    * \return true iff the heap is empty 
    */
   bool is_empty () const {
-    if (nb_elem = 0){
+    if (nb_elem == 0){
       return (true);
     }
     else{
