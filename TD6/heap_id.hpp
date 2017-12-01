@@ -95,7 +95,10 @@ private :
    * \pre \c  pos_1 and \c pos_2 are legal positions.
    * \return true iff the node at \c pos_1 has a value LESSER than or EQUAL to the one at node \c pos_2)*/
   bool le(unsigned int const pos_1, unsigned int const pos_2)const {
-    return (true);
+    if (pos_1 <= pos_2){
+      return (true);
+    }
+    return (false);
   }
 
 
@@ -107,7 +110,7 @@ private :
    * \return the index (in the array) of the left son of the node (indicated by index i). 
    */
   unsigned int get_pos_left_son(unsigned int i)const {
-    return (true); 
+    return (2*i+1); 
   } ;
   
   /*!
@@ -118,7 +121,7 @@ private :
    * \return the index (in the array) of the right son of the node (indicated by index i). 
    */
   unsigned int get_pos_right_son(unsigned int i)const {
-    return (-1); 
+    return (2*i+2); 
   } ;
   
   /*!
@@ -129,7 +132,10 @@ private :
    * \return the index (in the array) of the right son of the node (indicated by index i), except for the root (it returns 0). 
    */
   unsigned int get_pos_father(unsigned int i)const {
-    return(-1); 
+    if (i == 0) {
+      return 0;
+    }
+    return((i-1)/2); 
   } ;
 
 
@@ -141,6 +147,9 @@ private :
    * \pre \c pos_a and \c pos_b are legal positions.
    */
   void swap(const unsigned int pos_a, const unsigned int pos_b){
+    Element *t = elements[pos_a];
+    elements[pos_a] = elements[pos_b];
+    elements[pos_b] = t;
   }
 
   /*! 
@@ -200,7 +209,12 @@ public :
    * \return true iff the Heap_Id  is empty 
    */
   bool is_empty () const { 
-    return (false);
+    if (nb_elem == 0){
+      return (true);
+    }
+    else{
+      return (false);
+    }l
   }
   
   /*! 
@@ -243,23 +257,40 @@ public :
 
 template <class Element>
 bool Heap_Id <Element> :: is_valid () const {
+  for (unsigned int i = 0; i<nb_elem ; i++){
+    if ((le(i,get_pos_left_son(i)) || le(i,get_pos_right_son(i))) == false ){
+      return false;
+    }
+  }
   return true;
 }
 
 
 template <class Element>
 void Heap_Id <Element> :: lower(unsigned int pos){
+  while( is_valid() != true ){
+    if (le(get_pos_left_son(pos), get_pos_right_son(pos))){
+      swap(pos, get_pos_left_son(pos));
+    }
+    else{
+      swap(pos, get_pos_right_son(pos));
+    }
+  }
 }
 
 
 template <class Element>
 unsigned int Heap_Id <Element> :: push(Element & v){
-  return 1 ;
+  elements[nb_elem+1] = &v;
+  raise(nb_elem+1);
 }
 
 
 template <class Element>
 void Heap_Id <Element> :: raise(unsigned int pos){
+  while( is_valid() != true ){
+    swap(pos, get_pos_father(pos));
+  }
 }
 
 
