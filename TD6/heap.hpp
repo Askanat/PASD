@@ -129,7 +129,7 @@ private :
   void swap(const unsigned int pos_a, const unsigned int pos_b) {
     unsigned int t = elements[pos_a];
     elements[pos_a] = elements[pos_b];
-    elements[pose_b] = t;
+    elements[pos_b] = t;
   }
   
   /*!
@@ -250,7 +250,7 @@ void Heap <Element> :: lower(unsigned int pos) {
       swap(pos, get_pos_left_son(pos));
     }
     else{
-      swap(pos, get_pos_right(pos));
+      swap(pos, get_pos_right_son(pos));
     }
   }
 }
