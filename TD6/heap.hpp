@@ -79,7 +79,7 @@ private :
    * \pre \c  pos_1 and \c pos_2 are legal positions.
    * \return true iff the node at \c pos_1 has a value LESSER than or EQUAL to the one at node \c pos_2) */
   bool le(unsigned int const pos_1, unsigned int const pos_2) const {
-       if (pos_1 <= pos_2){
+    if (pos_1 <= pos_2){
       return (true);
     }
     return (false);
@@ -114,7 +114,7 @@ private :
    * \return the index (in the array) of the right son of the node (indicated by index i), except for the root (it returns 0). 
    */
   unsigned int get_pos_father(const unsigned int i) const {
-    if (i = 0) {
+    if (i == 0) {
       return 0;
     }
     return((i-1)/2); 
@@ -127,7 +127,7 @@ private :
    * \pre \c pos_a and \c pos_b are legal positions.
    */
   void swap(const unsigned int pos_a, const unsigned int pos_b) {
-    unsigned int t = elements[pos_a];
+    Element *t = elements[pos_a];
     elements[pos_a] = elements[pos_b];
     elements[pos_b] = t;
   }
@@ -178,6 +178,9 @@ public :
 
   /*! Release the array. */
   ~Heap () {
+    for(unsigned int i = 0; i<nb_elem; i++){
+      free(elements[i]);
+    }
   }
 
   
@@ -234,7 +237,7 @@ public :
 
 template <class Element>
 bool Heap <Element> :: is_valid () const {
-  for (int i = 0; i<nb_elem ; i++){
+  for (unsigned int i = 0; i<nb_elem ; i++){
     if ((le(i,get_pos_left_son(i)) || le(i,get_pos_right_son(i))) == false ){
       return false;
     }
@@ -254,10 +257,17 @@ void Heap <Element> :: lower(unsigned int pos) {
     }
   }
 }
-
+  /*!
+   * Add a value at the bottom of the tree (first empty cell) and swap it up (raise).
+   * \param v value to add.
+   * \pre The heap is valid.
+   * \post The heap is valid.
+   */
 
 template <class Element>
 void Heap <Element> :: push(Element & v) {
+  elements[nb_elem+1] = &v;
+  raise(nb_elem+1);
 }
 
 
@@ -268,8 +278,21 @@ void Heap <Element> :: raise(unsigned int pos) {
   }
 }
 
+
+  /*! 
+   * Remove and return the root of the heap.
+   * The heap is re equilibrated by putting the last element at the root and lowering it.
+   * \pre The heap is valid.
+   * \post The heap is valid.
+   * \return the minimum of the heap.
+   */
 template <class Element>
 Element & Heap <Element> :: pop() {
+  //return root
+  nb_elem--;
+  swap(0, nb_elem); 
+  lower(0);
+
 }
 
 
