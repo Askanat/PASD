@@ -237,8 +237,8 @@ public :
 
 template <class Element>
 bool Heap <Element> :: is_valid () const {
-  for (unsigned int i = 0; i<nb_elem ; i++){
-    if ((le(i,get_pos_left_son(i)) || le(i,get_pos_right_son(i))) == false ){
+  for (unsigned int i = nb_elem; i>0 ; i--){
+    if ((le(get_pos_father(i),i)) == false ){
       return false;
     }
   }
@@ -288,11 +288,14 @@ void Heap <Element> :: raise(unsigned int pos) {
    */
 template <class Element>
 Element & Heap <Element> :: pop() {
-  //return root
+  /*Element *buffer= elements[0];
+  swap(0, nb_elem);
+  elements[nb_elem]= 0;
   nb_elem--;
-  swap(0, nb_elem); 
   lower(0);
-
+  return *buffer;
+  */
+  
 }
 
 
