@@ -32,13 +32,24 @@ extern std :: string const sign_div ;
 
 
 
-/*! ??? */
+/*! 
+  * Class Op_Binary
+  * Hérite de la Class Expr
+  * Instancie les différents élément le composant via son constructeur
+  * Composé des fonctions:  
+  * -eval ()
+  *    -Param: Evaluation_Context & ec
+  * -toString ()
+  * -get_sign ()
+  * -compute ()
+  *    -Pamam: double left, double right
+*/
 class Op_Binary : public Expr {
   /*! Stock symbol for operator */
   std :: string sign ;
-  /*! ??? */
+  /*! Opérande gauche */
   Expr * left ; 
-  /*! ??? */
+  /*! Opérande droite */
   Expr * right ;
 public:
   // CONSTRUCTOR 
@@ -59,10 +70,10 @@ public:
   std :: string  toString () const ; 
   /*! Ensures that left is evaluated before right. */
   double eval ( Evaluation_Context & ec ) const ;
-  /*! ??? */
+  /*! Récupère le signe */
   std :: string get_sign () const ; 
 protected :
-  /*! ??? */
+  /*! Calcul et Retourne la valeur de l'opération */
   virtual double compute ( double left ,
 			   double right ) const = 0 ;
 } ; 

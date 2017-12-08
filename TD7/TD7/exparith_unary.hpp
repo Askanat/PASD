@@ -27,8 +27,11 @@ extern std :: string const sign_log ;
   * Class Op_Unary
   * Hérite de la Class Expr
   * Instancie les différents élément le composant via son constructeur
-  * Appel la fonction eval
-  * Eval réalise l'opération
+  * Composé des fonctions:  
+  * -eval ()
+  *    -Param: Evaluation_Context & ec
+  * -compute ()
+  *    -Pamam: double x
 */
 class Op_Unary : public Expr {
   /*! Stock symbol for Operator */
@@ -53,7 +56,7 @@ public:
   std :: string  toString () const ; 
   double eval ( Evaluation_Context & ec ) const ;
 protected :
-  /*! Calcul et retourne la valeur de l'opération */
+  /*! Calcul et Retourne la valeur de l'opération */
   virtual double compute ( double x ) const = 0 ;
 } ; 
 
