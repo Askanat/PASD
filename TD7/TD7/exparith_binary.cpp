@@ -23,7 +23,7 @@ double Op_Binary :: eval ( Evaluation_Context & ec ) const {
 
 
 string Op_Binary :: toString () const { 
-  return * ( string * ) NULL ;
+  return  this->left->toString ()+" "+ this->sign +" "+ this->right->toString()  ;
 }
 
 

@@ -11,22 +11,24 @@ using namespace std ;
 std :: string const sign_set = ":=" ; 
 
 
-double Variable :: eval ( Evaluation_Context & ec ) const{ 
-  return id ;
+double Variable :: eval ( Evaluation_Context & ec ) const { 
+  return ec.get_value(this->id) ;
 }
 
 
 string Variable :: toString () const { 
-  return * ( string * ) id ;
+  return this->id ;
 } 
 
 
 double Set :: eval ( Evaluation_Context & ec ) const { 
-  return value ;
+	double val =  value->eval(ec);
+    ec.valuate(variable->get_id(),val);
+    return val;
 }
 
 
 string Set :: toString () const { 
-  return * ( string * ) value ;
+  return "( "+this->variable->toString()+ " := " + this->value->toString() + " )";
 }
 

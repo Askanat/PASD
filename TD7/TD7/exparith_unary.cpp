@@ -21,7 +21,7 @@ double Op_Unary :: eval ( Evaluation_Context & ec ) const {
 
 
 string Op_Unary :: toString () const { 
-  return * ( string * ) NULL ;
+  return sign + "(" + this->argument->toString() + ")";
 }
 
 
