@@ -34,7 +34,7 @@ extern std :: string const sign_div ;
 
 /*! ??? */
 class Op_Binary : public Expr {
-  /*! ??? */
+  /*! Stock symbol for operator */
   std :: string sign ;
   /*! ??? */
   Expr * left ; 
