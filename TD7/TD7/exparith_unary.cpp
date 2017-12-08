@@ -16,7 +16,7 @@ std :: string const sign_log = "log" ;
 
 
 double Op_Unary :: eval ( Evaluation_Context & ec ) const { 
-  return NAN ;
+  return compute (argument->eval(ec))  ;
 }
 
 

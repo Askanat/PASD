@@ -12,7 +12,7 @@ using namespace std ;
 
 
 double Constant :: eval ( Evaluation_Context & ec ) const{ 
-  return NAN ;
+  return value ;
 }
 
 

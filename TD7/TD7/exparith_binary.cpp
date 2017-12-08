@@ -16,7 +16,9 @@ std :: string const sign_div = "/" ;
 
 
 double Op_Binary :: eval ( Evaluation_Context & ec ) const { 
-  return NAN ;
+	double l = left->eval(ec);
+	double r = right->eval(ec);
+  return compute (l,r) ;
 }
 
 

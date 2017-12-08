@@ -12,21 +12,21 @@ std :: string const sign_set = ":=" ;
 
 
 double Variable :: eval ( Evaluation_Context & ec ) const{ 
-  return NAN ;
+  return id ;
 }
 
 
 string Variable :: toString () const { 
-  return * ( string * ) NULL ;
+  return * ( string * ) id ;
 } 
 
 
 double Set :: eval ( Evaluation_Context & ec ) const { 
-  return NAN ;
+  return value ;
 }
 
 
 string Set :: toString () const { 
-  return * ( string * ) NULL ;
+  return * ( string * ) value ;
 }
 
