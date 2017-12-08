@@ -69,7 +69,7 @@ public :
 class Evaluation_Context_Simple 
   : public Evaluation_Context {
 protected :
-  std :: map < std :: string const , double > valuation ;
+  std :: map < std :: string const , double > valuation ;//valuation c'est le nom ex: valuation["a"] = 10.0;
 public :
   double get_value ( std :: string const & id ) ;
   void valuate ( std :: string const & id ,
