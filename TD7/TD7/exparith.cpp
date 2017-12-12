@@ -11,14 +11,12 @@ using namespace std ;
 
 
 
-double Constant :: eval ( Evaluation_Context & ec ) const
-{
+double Constant :: eval ( Evaluation_Context & ec ) const {
     return  value ;
 }
 
 
-string Constant :: toString () const
-{
+string Constant :: toString () const {
     std::stringstream ss;
     ss << this->value;
     std::string chaine = ss.str();

@@ -16,9 +16,9 @@ std :: string const sign_div = "/" ;
 
 
 double Op_Binary :: eval ( Evaluation_Context & ec ) const { 
-	double l = left->eval(ec);
-	double r = right->eval(ec);
-  return compute (l,r) ;
+	double g = left->eval(ec);
+	double d = right->eval(ec);
+  return compute (g,d) ;
 }
 
 
@@ -29,8 +29,8 @@ string Op_Binary :: toString () const {
 
 # define COMPUTE_BINARY( class , op )				\
     double class :: compute ( double left ,			\
-    double right ) const {					\
-    return NAN ;						\
+    double right ) const {	\
+    return left op right;						\
   }
 
 COMPUTE_BINARY ( Add , + )
