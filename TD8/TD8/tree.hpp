@@ -96,8 +96,9 @@ public :
    * \param val Value for the added son.
    * \return A pointer to the newly created \c Node.
    */
-  Node * add_left_son ( T val ) { 
-    return NULL ;
+  Node * add_left_son ( T val ) {
+    Node n = new Node ( val , get_father() );
+    return *n ;
   } ; 
 
 
@@ -105,8 +106,9 @@ public :
    * \param val Value for the added brother.
    * \return A pointer to the newly created \c Node.
    */
-  Node * add_right_brother ( T val ) { 
-    return NULL ;
+  Node * add_right_brother ( T val ) {
+    Node n = new Node (val ,  get_father() );
+    return *n ;
   }
  
   /*!

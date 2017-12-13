@@ -31,17 +31,32 @@ namespace {
    * \param str string to be trimmed.
    */
   void trim ( string & str ) { 
+    while (str[0] == ' ' ) {
+      str.erase (str.begin()+0);
+    }
+    int i = str.length();
+    
+    while (str[i-1] == ' ') {
+      str.erase(str.begin()+i);
+      i=str.length();
+    }
   }
-
   /*
    * Test if a trimmed string is an opening tag (of the form '<' then a letter then letters and/or digits then '>')
    * If this is an opening tag, then the string is reduced to the letters and digits. 
    * \param str trimmed string.
    * \return true if this is an opening tag.
    */
-  bool is_opening_tag ( string & str ) { 
-    return true ; 
+  bool is_opening_tag ( string & str ) {
+    int i = str.length();
+    if ((str[0] == '<') && (str[i-1] == '>')){
+      str.erase (str.begin()+i);
+      str.erase (str.begin()+0);
+      return true;
+    }
+    return false;
   }
+
 
   /*
    * Test if a trimmed string is an closing tag (of the form "</" then a letter then letters and/or digits then '>')
@@ -49,9 +64,17 @@ namespace {
    * \param str trimmed string.
    * \return true if this is an closing tag.
    */
-  bool is_closing_tag ( string & str ) { 
-    return true ; 
+  bool is_closing_tag ( string & str ) {
+    int i = str.length();
+    if ((str[0] == '<') && (str[1] == '/') && (str[i-1] == '>')){
+      str.erase (str.begin()+i);
+      str.erase (str.begin()+1);
+      str.erase (str.begin()+0);
+      return true;
+    }
+    return false;
   }
+
 
   enum load_state {
     beginning ,
